@@ -20,10 +20,10 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Construir la imagen Docker
-        run: docker build -t yeiko01/hola-mundo:latest .
+        run: docker build -t bryanjone/hola-mundo:latest .
 
       - name: Subir imagen a Docker Hub
-        run: docker push Bryan/hola-mundo:latest
+        run: docker push bryanjone/hola-mundo:latest
 
       - name: Desplegar en Render
         run: curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK }}
