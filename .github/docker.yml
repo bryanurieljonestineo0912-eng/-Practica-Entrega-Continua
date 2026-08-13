@@ -1,0 +1,29 @@
+name: Docker Build, Push and Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Descargar código
+        uses: actions/checkout@v4
+
+      - name: Iniciar sesión en Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Construir la imagen Docker
+        run: docker build -t yeiko01/hola-mundo:latest .
+
+      - name: Subir imagen a Docker Hub
+        run: docker push Bryan/hola-mundo:latest
+
+      - name: Desplegar en Render
+        run: curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK }}
