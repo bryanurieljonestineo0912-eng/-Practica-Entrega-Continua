@@ -26,4 +26,4 @@ jobs:
         run: docker push bryanjone/hola-mundo:latest
 
       - name: Desplegar en Render
-        run: curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK }}
+        run: curl -f -X POST ${{ secrets.RENDER_DEPLOY_HOOK }}
